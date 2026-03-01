@@ -1,0 +1,537 @@
+:root {
+  /* Color Palette - Pink Purple Theme */
+  --primary-pink: #e91e63;
+  --primary-purple: #9c27b0;
+  --light-pink: #fce4ec;
+  --light-purple: #f3e5f5;
+  --dark-pink: #ad1457;
+  --dark-purple: #6a1b9a;
+  --accent-pink: #ff4081;
+  --accent-purple: #e040fb;}
+
+.product-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(252, 228, 236, 0.8));
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(156, 39, 176, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(233, 30, 99, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(156, 39, 176, 0.25);
+  border-color: rgba(233, 30, 99, 0.2);
+}
+
+.product-image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--light-pink), var(--light-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.product-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(156, 39, 176, 0.1));
+  pointer-events: none;
+}
+
+.product-img-file {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-img-file {
+  transform: scale(1.05);
+}
+
+.product-emoji-fallback {
+  font-size: 60px;
+  filter: drop-shadow(0 2px 4px rgba(156, 39, 176, 0.3));
+}
+
+.product-info {
+  padding: 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.product-title {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--dark-pink), var(--dark-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 44px;
+}
+
+.product-author {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  color: #9c27b0;
+  opacity: 0.8;
+}
+
+.product-price {
+  margin: 12px 0;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-pink), var(--primary-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.buy-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 25%, #8e44ad 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: auto;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.buy-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+  background: linear-gradient(135deg, #ff8fab 0%, #d4567a 25%, #9b59b6 100%);
+}
+
+.buy-button:active {
+  transform: translateY(0);
+}
+
+.buy-button:disabled {
+  background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+
+/* Modal Styles - Pink Purple Theme */
+.size-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.7), rgba(233, 30, 99, 0.7));
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.size-modal-content {
+  background: linear-gradient(145deg, #ffffff, #fff5f8);
+  padding: 40px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 900px;
+  position: relative;
+  box-shadow: 0 25px 80px rgba(156, 39, 176, 0.3);
+  animation: slideUp 0.4s ease;
+  border: 1px solid rgba(233, 30, 99, 0.1);
+}
+
+.modal-body-detail {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+.modal-left img {
+  width: 340px;
+  height: 440px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(156, 39, 176, 0.2);
+  transition: all 0.4s ease;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.modal-left img:hover {
+  transform: scale(1.02) rotate(1deg);
+  box-shadow: 0 25px 60px rgba(156, 39, 176, 0.3);
+}
+
+.modal-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #2d3436; /* Tambahkan ini agar semua teks di kolom kanan jadi gelap */
+}
+
+/* KHUSUS UNTUK NAMA PRODUK (h2) */
+.modal-right h2 {
+  color: #e9528c !important; /* Memaksa warna hitam/gelap agar terlihat */
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0;
+  text-align: left;
+}
+.modal-title {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e91e63, #9c27b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 5px;
+  color: #e91e63; /* Fallback color */
+}
+.modal-price {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #e91e63, #9c27b0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.size-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6a1b9a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.size-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+.size-options button {
+  padding: 12px 24px;
+  border: 2px solid #e1bee7;
+  background: white;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #7b1fa2;
+  transition: all 0.2s ease;
+  min-width: 50px;
+}
+
+.size-options button:hover {
+  border-color: #ce93d8;
+  background: #f3e5f5;
+  transform: translateY(-2px);
+}
+
+.size-options button.active {
+  background: linear-gradient(135deg, #9c27b0, #e91e63);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+  transform: translateY(-2px);
+}
+
+.quantity-section {
+  margin-top: 20px;
+  padding: 20px;
+  background: linear-gradient(145deg, #fff5f8, #f3e5f5);
+  border-radius: 16px;
+  border: 1px solid rgba(233, 30, 99, 0.15);
+}
+
+/* Container Utama */
+.qty-selector {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label-modal {
+  font-size: 13px;
+  font-weight: 700;
+  color: #636e72;
+  letter-spacing: 0.5px;
+}
+
+/* Wrapper Tombol dan Input */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Jarak antar elemen */
+}
+
+/* Desain Tombol + dan - */
+.qty-controls button {
+  width: 42px;
+  height: 42px;
+  background-color: #ffffff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px; /* Sudut melengkung modern */
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d3436;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.qty-controls button:hover {
+  border-color: #6c5ce7; /* Warna ungu sesuai tema Liffa */
+  color: #6c5ce7;
+  background-color: #f8f7ff;
+}
+
+/* Desain Angka di Tengah */
+.qty-controls input {
+  width: 40px;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: #2d3436;
+  outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Menghilangkan panah bawaan browser */
+.qty-controls input::-webkit-inner-spin-button,
+.qty-controls input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.qty-selector small {
+  color: #b2bec3;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.quantity-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #6a1b9a;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.quantity-label::before {
+  content: '✦';
+  color: #e91e63;
+  font-size: 12px;
+}
+
+
+.quantity-input {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid #e1bee7;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.15);
+}
+
+.quantity-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: linear-gradient(145deg, #f8bbd9, #e1bee7);
+  color: #6a1b9a;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.quantity-input button:hover {
+  background: linear-gradient(135deg, #f48fb1, #ce93d8);
+  color: white;
+}
+
+.quantity-btn:active {
+  transform: scale(0.95);
+}
+
+.quantity-btn.minus {
+  border-right: 1px solid #e1bee7;
+}
+
+.quantity-btn.plus {
+  border-left: 1px solid #e1bee7;
+}
+
+.quantity-input input {
+  width: 60px;
+  height: 42px;
+  text-align: center;
+  border: none;
+  font-size: 17px;
+  font-weight: 700;
+  color: #6a1b9a;
+  background: transparent;
+  outline: none;
+}
+.quantity-input input::-webkit-outer-spin-button,
+.quantity-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-input input[type=number] {
+  -moz-appearance: textfield;
+} 
+.stock-info {
+  font-size: 13px;
+  color: #9c27b0;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+/* Tombol Keranjang (Outline Style) */
+.btn-add-cart {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  color: #6c5ce7;
+  border: 2px solid #6c5ce7;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+  background: #f8f7ff;
+  transform: translateY(-2px);
+}
+
+/* Tombol Beli Sekarang (Solid Gradient Style) */
+.btn-buy-now {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #6c5ce7 0%, #4834d4 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.btn-buy-now:hover {
+  background: linear-gradient(135deg, #f06292 0%, #ab47bc 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(233, 30, 99, 0.5);
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: linear-gradient(135deg, #f8bbd9, #e1bee7);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  color: #6a1b9a;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-modal:hover {
+  background: linear-gradient(135deg, #e91e63, #9c27b0);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-body-detail {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .modal-left img {
+    width: 100%;
+    height: 300px;
+  }
+  
+  .size-modal-content {
+    padding: 25px;
+  }
+}
+
+
+
