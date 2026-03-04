@@ -17,7 +17,9 @@ router.post('/', authenticateToken, async (req, res) => {
       customer_phone,
       customer_address,
       payment_method,
-      items,
+      cash_paid,
+      change_amount,
+      items
     } = req.body;
 
     // Validasi input yang lebih ketat
@@ -83,25 +85,31 @@ router.post('/', authenticateToken, async (req, res) => {
     }, 0);
 
     console.log('💰 Total amount:', total_amount);
-
+    console.log('💵 cash_paid dari frontend:', cash_paid);
+    console.log('💰 change_amount dari frontend:', change_amount);
     // Insert transaksi
-    const transactionResult = await client.query(
-      `INSERT INTO transactions 
-       (id_user, customer_name, customer_phone, customer_address, total, payment_method, status, created_at, updated_at)
-       VALUES ($1, $2, $3, $4, $5, $6, 'completed', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-       RETURNING *`,
-      [
-        id_kasir,
-        customer_name,
-        customer_phone,
-        customer_address,
-        total_amount,
-        payment_method,
-      ]
+   const transactionResult = await client.query(
+    
+     `INSERT INTO transactions 
+   (id_user, customer_name, customer_phone, customer_address, total, payment_method, cash_paid, change_amount, status, created_at, updated_at)
+   VALUES ($1,$2,$3,$4,$5,$6,$7,$8,'completed',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+   RETURNING *`,
+     [
+       id_kasir,
+       customer_name,
+       customer_phone,
+       customer_address,
+       total_amount,
+       payment_method,
+       Number(cash_paid ?? 0),
+       Number(change_amount ?? 0),
+     ]
     );
+    console.log("🔎 HASIL INSERT LANGSUNG:", transactionResult.rows[0]);
 
     const id_transaction = transactionResult.rows[0].id_transaction;
     console.log('✅ Transaksi dibuat:', id_transaction);
+    
 
     // Insert items dan kurangi stok
     for (const item of items) {

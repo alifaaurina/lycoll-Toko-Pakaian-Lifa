@@ -1,3 +1,81 @@
+/* --- STYLE TAMBAHAN UNTUK SEARCH & KATEGORI M3 --- */
+
+.search-category-section {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.search-bar-container {
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-input-m3 {
+  width: 100%;
+  padding: 15px 25px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input-m3::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-input-m3:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.category-list-m3 {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.category-item-btn {
+  padding: 10px 25px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.category-item-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Tombol Aktif Jadi Pink */
+.category-item-btn.active {
+  background: #f47ed6; /* Warna Pink Sesuai Tema */
+  border-color: #c293c3;
+  box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+  color: white;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: white;
+  font-size: 18px;
+  backdrop-filter: blur(10px);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+}
 
 /* Animated Gradient Background - Pink Purple Theme */
 .dashboard-container {
@@ -169,7 +247,6 @@
   gap: 10px;
 }
 
-
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -214,7 +291,7 @@
   left: 0;
   right: 0;
   height: 60px;
-  background: linear-gradient(to top, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.3), transparent);
 }
 
 .product-img-file {
@@ -256,7 +333,6 @@
   color: #d11bda;
   margin-bottom: 5px;
 }
-
 
 .product-price {
   margin: 12px 0;
@@ -314,7 +390,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive */
@@ -330,19 +408,19 @@
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .header-kiri h1 {
     font-size: 22px;
   }
-  
+
   .dashboard-content {
     padding: 25px;
   }
-  
+
   .dashboard-content h2 {
     font-size: 24px;
   }
-  
+
   .products-grid {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
@@ -353,9 +431,88 @@
   .products-grid {
     grid-template-columns: 1fr;
   }
-  
-  .tombol-keranjang, .tombol-logout {
+
+  .tombol-keranjang,
+  .tombol-logout {
     padding: 10px 16px;
     font-size: 13px;
+  }
+}
+
+/* === TOMBOL GRADIENT (SAMA VIBE KERANJANG) === */
+.tombol-gradient {
+  background: linear-gradient(135deg, #f8c6ff, #d89bff);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 25px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(216, 155, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.tombol-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(186, 166, 199, 0.5);
+}
+
+/* === DROPDOWN WRAPPER === */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* === DROPDOWN MENU === */
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 60px;
+  background: linear-gradient(180deg, #fff0fb, #f7e6ff);
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(160, 90, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  padding: 10px 0;
+  z-index: 999;
+  animation: fadeIn 0.2s ease;
+}
+
+/* === ITEM MENU === */
+.dropdown-menu button {
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b2e8f;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu button:hover {
+  background: rgba(216, 155, 255, 0.2);
+  padding-left: 24px;
+}
+
+/* === LOGOUT STYLE === */
+.dropdown-menu button:last-child {
+  border-top: 1px solid rgba(216, 155, 255, 0.3);
+  margin-top: 6px;
+  color: #d63384;
+  font-weight: 600;
+}
+
+/* === ANIMASI === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

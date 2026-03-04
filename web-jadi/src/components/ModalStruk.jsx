@@ -35,7 +35,7 @@ function ModalStruk({ transaksi, tutup }) {
           <div className="struk-section">
             <p>No. Transaksi #{transaksi.id_transaction}</p>
             <p>Waktu : {formatTanggal(transaksi.created_at)}</p>
-            <p>Kasir : {transaksi.kasir_name}</p>
+            <p>Kasir : {transaksi.kasir_name || '-'}</p>
           </div>
 
           <div className="divider">--------------------------------</div>
@@ -57,10 +57,15 @@ function ModalStruk({ transaksi, tutup }) {
                   <div className="flex-between">
                     <span>
                       {item.qty} x Rp{' '}
-                      {Number(item.price).toLocaleString('id-ID')}
+                      {Number(item.price || item.price_at_time).toLocaleString(
+                        'id-ID'
+                      )}
                     </span>
                     <span>
-                      Rp {Number(item.price * item.qty).toLocaleString('id-ID')}
+                      Rp{' '}
+                      {Number(
+                        (item.price || item.price_at_time) * item.qty
+                      ).toLocaleString('id-ID')}
                     </span>
                   </div>
                 </div>
@@ -73,11 +78,50 @@ function ModalStruk({ transaksi, tutup }) {
           <div className="struk-section total-section">
             <div className="flex-between total">
               <span>BAYAR</span>
-              <span>Rp {Number(transaksi.total).toLocaleString('id-ID')}</span>
+              <span>
+                Rp {Number(transaksi.total || 0).toLocaleString('id-ID')}
+              </span>
             </div>
             <p className="metode">
               Metode Pembayaran : {transaksi.payment_method}
             </p>
+            {transaksi.payment_method === 'Tunai' && (
+              <>
+                <div className="flex-between">
+                  <span>Uang Dibayar</span>
+                  <span>
+                    Rp{' '}
+                    {Number(transaksi.cash_paid || 0).toLocaleString('id-ID')}
+                  </span>
+                </div>
+
+                <div className="flex-between">
+                  <span>Kembalian</span>
+                  <span>
+                    Rp{' '}
+                    {Number(transaksi.change_amount || 0).toLocaleString(
+                      'id-ID'
+                    )}
+                  </span>
+                </div>
+              </>
+            )}
+
+            {transaksi.payment_method === 'Qris' && (
+              <>
+                <div className="flex-between">
+                  <span>Total Dibayar </span>
+                  <span>
+                    Rp {Number(transaksi.total || 0).toLocaleString('id-ID')}
+                  </span>
+                </div>
+
+                <div className="flex-between">
+                  <span>Status</span>
+                  <span>Lunas</span>
+                </div>
+              </>
+            )}
           </div>
 
           <div className="divider">================================</div>

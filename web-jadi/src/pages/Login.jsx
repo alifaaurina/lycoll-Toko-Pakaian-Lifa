@@ -25,6 +25,7 @@ function Login() {
 
       if (res.ok) {
         localStorage.setItem('token', data.token);
+        localStorage.setItem('role', data.user.role);
         navigate('/dashboard');
       } else {
         setError(data.message || 'Login gagal');
@@ -40,7 +41,7 @@ function Login() {
     <div className="login-container">
       <div className="login-box">
         <div className="login-header">
-          <h1>LiffaColections</h1>
+          <h1>Lyffa.Colections</h1>
           <p>Sistem Manajemen Toko</p>
         </div>
 

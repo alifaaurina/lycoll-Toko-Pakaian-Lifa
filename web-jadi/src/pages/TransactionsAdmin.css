@@ -1,0 +1,55 @@
+.transactions-container {
+  padding: 40px;
+  background: linear-gradient(135deg, #ffe6f2, #f3e8ff);
+  min-height: 100vh;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(123, 44, 191, 0.1);
+}
+
+.transactions-table th {
+  background: linear-gradient(135deg, #ff4d94, #c77dff);
+  color: white;
+  padding: 12px;
+}
+
+.transactions-table td {
+  padding: 12px;
+  text-align: center;
+}
+
+.detail-row {
+  background: #faf5ff;
+}
+
+.detail-box {
+  padding: 10px;
+}
+
+.filter-container {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  align-items: center;
+}
+
+.filter-container input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.btn-clear {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #ff4d94;
+  color: white;
+  cursor: pointer;
+}
