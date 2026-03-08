@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const usersRoutes = require('./routes/users');
 
 app.use(
   cors({
@@ -16,5 +17,6 @@ app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
 app.use('/products', require('./routes/products'));
 app.use('/transactions', require('./routes/transactions'));
+app.use('/api/users', usersRoutes);
 
 module.exports = app;

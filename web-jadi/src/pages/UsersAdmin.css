@@ -1,0 +1,136 @@
+/* BACKGROUND HALAMAN*/
+.users-admin-container {
+  min-height: 100vh;
+  padding: 40px;
+
+  background: linear-gradient(135deg, #ffd6e7, #ffc0dd, #f7a8d8, #e38bd5);
+
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* TITLE */
+.users-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #4b004f;
+}
+
+/* FORM TAMBAH USER*/
+.form-user {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 35px;
+  flex-wrap: wrap;
+}
+.form-user input,
+.form-user select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* BUTTON TAMBAH USER*/
+.btn-add {
+  background: linear-gradient(90deg, #ff4da6, #b84dff);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn-add:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* TABEL USERS*/
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* HEADER TABLE */
+.users-table thead {
+  background: linear-gradient(90deg, #ff4da6, #7a5cff);
+  color: white;
+}
+.users-table th {
+  padding: 14px;
+  text-align: left;
+}
+
+/* ROW */
+.users-table td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+}
+.users-table tr:hover {
+  background: #fff3f8;
+}
+
+/* ROLE BADGE*/
+.role {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.role.Admin {
+  background: #ffd1e8;
+  color: #b30059;
+}
+.role.Kasir {
+  background: #d6e9ff;
+  color: #0052cc;
+}
+
+/*STATUS BADGE*/
+.status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.status.aktif {
+  background: #d4f5dd;
+  color: #008a2e;
+}
+.status.nonaktif {
+  background: #ffd6d6;
+  color: #b30000;
+}
+
+/* BUTTON AKSI */
+.btn-disable {
+  background: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-enable {
+  background: #2ecc71;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.btn-disable:hover,
+.btn-enable:hover {
+  opacity: 0.85;
+}

@@ -3,6 +3,7 @@ import { useKeranjang } from '../context/KeranjangContext';
 import ModalCheckout from './ModalCheckout';
 import './SidebarKeranjang.css';
 
+// Komponen sidebar keranjang yang muncul saat tombol keranjang di header diklik
 function SidebarKeranjang({ buka, tutup }) {
   const {
     itemKeranjang,
@@ -16,6 +17,7 @@ function SidebarKeranjang({ buka, tutup }) {
 
   const [bukaCheckout, setBukaCheckout] = useState(false);
 
+  // Fungsi untuk membuka modal checkout dengan item yang dipilih
   const handleCheckout = () => {
     if (itemTerpilih.length === 0) {
       alert('Pilih minimal satu produk untuk dibeli!');

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './TransactionsAdmin.css';
 
+// Komponen untuk halaman admin melihat riwayat transaksi
 function TransactionsAdmin() {
   const [transactions, setTransactions] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-    const [detail, setDetail] = useState(null);
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+  const [detail, setDetail] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const token = localStorage.getItem('token');
-
+  // Fetch semua transaksi
   const fetchTransactions = async () => {
     const res = await fetch('http://localhost:5000/transactions', {
       headers: {
@@ -20,6 +21,7 @@ function TransactionsAdmin() {
     setTransactions(data);
   };
 
+  // Fetch detail transaksi berdasarkan ID
   const fetchDetail = async (id) => {
     if (selectedId === id) {
       setSelectedId(null);
@@ -41,25 +43,25 @@ function TransactionsAdmin() {
     fetchTransactions();
   }, []);
 
-  // ===== STATISTICS =====
+  // Hitung total transaksi, omzet, dan jumlah kasir unik
   const totalTransaksi = transactions.length;
-
   const totalOmzet = transactions.reduce((acc, t) => acc + Number(t.total), 0);
-
   const uniqueKasir = [...new Set(transactions.map((t) => t.kasir_name))]
     .length;
-const filteredTransactions = transactions.filter((t) => {
-  if (!startDate || !endDate) return true;
 
-  const transactionDate = new Date(t.created_at);
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+  const filteredTransactions = transactions.filter((t) => {
+    if (!startDate || !endDate) return true;
 
-  // Supaya end date termasuk hari itu juga
-  end.setHours(23, 59, 59, 999);
+    const transactionDate = new Date(t.created_at);
+    const start = new Date(startDate);
+    const end = new Date(endDate);
 
-  return transactionDate >= start && transactionDate <= end;
-});
+    // Supaya end date termasuk hari itu juga
+    end.setHours(23, 59, 59, 999);
+
+    return transactionDate >= start && transactionDate <= end;
+  });
+  // Format angka ke Rupiah
   const formatRupiah = (angka) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -67,6 +69,7 @@ const filteredTransactions = transactions.filter((t) => {
     }).format(angka);
   };
 
+  // Format tanggal ke format Indonesia
   return (
     <div className="transactions-container">
       <h2>Riwayat Transaksi</h2>

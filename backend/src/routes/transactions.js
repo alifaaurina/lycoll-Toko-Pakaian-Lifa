@@ -19,7 +19,9 @@ router.post('/', authenticateToken, async (req, res) => {
       payment_method,
       cash_paid,
       change_amount,
-      items
+      bank_name,
+      reference_number,
+      items,
     } = req.body;
 
     // Validasi input yang lebih ketat
@@ -87,23 +89,30 @@ router.post('/', authenticateToken, async (req, res) => {
     console.log('💰 Total amount:', total_amount);
     console.log('💵 cash_paid dari frontend:', cash_paid);
     console.log('💰 change_amount dari frontend:', change_amount);
+
+    const finalBankName = payment_method === 'Transfer' ? bank_name : null;
+
+    const finalReferenceNumber =
+      payment_method === 'Transfer' ? reference_number : null;
+
     // Insert transaksi
-   const transactionResult = await client.query(
-    
-     `INSERT INTO transactions 
-   (id_user, customer_name, customer_phone, customer_address, total, payment_method, cash_paid, change_amount, status, created_at, updated_at)
-   VALUES ($1,$2,$3,$4,$5,$6,$7,$8,'completed',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
-   RETURNING *`,
-     [
-       id_kasir,
-       customer_name,
-       customer_phone,
-       customer_address,
-       total_amount,
-       payment_method,
-       Number(cash_paid ?? 0),
-       Number(change_amount ?? 0),
-     ]
+    const transactionResult = await client.query(
+      `INSERT INTO transactions 
+(id_user, customer_name, customer_phone, customer_address, total, payment_method, cash_paid, change_amount, bank_name, reference_number, status, created_at, updated_at)
+VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'completed',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+RETURNING *`,
+      [
+        id_kasir,
+        customer_name,
+        customer_phone,
+        customer_address,
+        total_amount,
+        payment_method,
+        Number(cash_paid ?? 0),
+        Number(change_amount ?? 0),
+        finalBankName,
+        finalReferenceNumber,
+      ]
     );
     console.log("🔎 HASIL INSERT LANGSUNG:", transactionResult.rows[0]);
 

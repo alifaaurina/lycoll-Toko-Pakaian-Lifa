@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
+//Fungsi  untuk Login
 function Login() {
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [loading, setLoading] = useState(false);
@@ -9,20 +10,20 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  // Fungsi untuk menangani submit form login
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
+    // Kirim data login ke backend
     try {
       const res = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       const data = await res.json();
-
       if (res.ok) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('role', data.user.role);
@@ -37,6 +38,7 @@ function Login() {
     }
   };
 
+  // Fitur untuk hide password
   return (
     <div className="login-container">
       <div className="login-box">

@@ -1,133 +1,132 @@
 .overlay-struk {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
 }
 
 .modal-struk {
-    background: #ffffff;
-    width: 90%;
-    max-width: 360px;
-    max-height: 90vh;
-    overflow-y: auto;
+  background: #ffffff;
+  width: 90%;
+  max-width: 360px;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 /* STRUK ASLI STYLE */
 .struk-content {
-    padding: 20px;
-    font-family: "Courier New", monospace;
-    font-size: 12px;
-    line-height: 1.4;
-    color: #000 !important;   /* PAKSA HITAM */
+  padding: 20px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #000 !important; /* PAKSA HITAM */
 }
 
 /* pastikan semua isi hitam */
 .struk-content * {
-    color: #000 !important;
+  color: #000 !important;
 }
 
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .nama-toko {
-    font-weight: bold;
-    font-size: 14px;
-    letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1px;
 }
 
 .divider {
-    text-align: center;
-    margin: 10px 0;
+  text-align: center;
+  margin: 10px 0;
 }
 
 .struk-section p {
-    margin: 4px 0;
+  margin: 4px 0;
 }
 
 /* ITEM */
 .item-row {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 .flex-between {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* TOTAL */
 .total {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .metode {
-    margin-top: 4px;
+  margin-top: 4px;
 }
 
 /* FOOTER */
 .footer {
-    margin-top: 10px;
-    font-size: 11px;
+  margin-top: 10px;
+  font-size: 11px;
 }
 
 /* BUTTON */
 .struk-actions {
-    display: flex;
-    gap: 10px;
-    padding: 15px;
-    border-top: 1px solid #ddd;
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  border-top: 1px solid #ddd;
 }
 
 .btn-cetak,
 .btn-tutup-struk {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .btn-cetak {
-    background: #da52ba;
-    color: #fff;
+  background: #da52ba;
+  color: #fff;
 }
 
 .btn-tutup-struk {
-    background: #ddd;
+  background: #ddd;
 }
 
 /* PRINT MODE */
 @media print {
+  body * {
+    visibility: hidden;
+  }
 
-    body * {
-        visibility: hidden;
-    }
+  #area-cetak,
+  #area-cetak * {
+    visibility: visible;
+  }
 
-    #area-cetak,
-    #area-cetak * {
-        visibility: visible;
-    }
+  #area-cetak {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80mm;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #000 !important;
+  }
 
-    #area-cetak {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 80mm;
-        padding: 10px;
-        font-family: "Courier New", monospace;
-        font-size: 12px;
-        color: #000 !important;
-    }
+  .no-print {
+    display: none !important;
+  }
 
-    .no-print {
-        display: none !important;
-    }
-
-    .modal-struk {
-        box-shadow: none;
-    }
+  .modal-struk {
+    box-shadow: none;
+  }
 }

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const KeranjangContext = createContext();
 
 export function KeranjangProvider({ children }) {
-  // Load dari localStorage saat init (hanya untuk session yang sama)
+  //fungsi untuk menyimpan item keranjang, item yang dipilih untuk checkout, dan transaksi langsung (beli sekarang)
   const [itemKeranjang, setItemKeranjang] = useState(() => {
     const saved = localStorage.getItem('keranjang');
     return saved ? JSON.parse(saved) : [];
@@ -25,6 +25,7 @@ export function KeranjangProvider({ children }) {
     localStorage.removeItem('keranjang');
   };
 
+  // Fungsi untuk menambahkan produk ke keranjang
   const tambahKeKeranjang = (produk) => {
     setItemKeranjang((sebelumnya) => {
       const key = `${produk.id_product}-${produk.size}`;
@@ -43,6 +44,7 @@ export function KeranjangProvider({ children }) {
     });
   };
 
+  // Fungsi untuk memperbarui jumlah item di keranjang
   const updateQuantity = (id_product, size, quantity) => {
     if (quantity <= 0) {
       hapusDariKeranjang(id_product, size);
@@ -57,6 +59,7 @@ export function KeranjangProvider({ children }) {
     );
   };
 
+  // Fungsi untuk menghapus item dari keranjang
   const hapusDariKeranjang = (id_product, size) => {
     const key = `${id_product}-${size}`;
     setItemKeranjang((sebelumnya) =>
@@ -67,6 +70,7 @@ export function KeranjangProvider({ children }) {
     setItemTerpilih((prev) => prev.filter((id) => id !== key));
   };
 
+  // Fungsi untuk mengosongkan keranjang setelah checkout sukses
   const kosongkanKeranjang = () => {
     setItemKeranjang([]);
     setItemTerpilih([]);
@@ -83,6 +87,7 @@ export function KeranjangProvider({ children }) {
     setItemTerpilih([]);
   };
 
+  // Fungsi untuk toggle pilihan item saat checkout
   const togglePilihItem = (id_product, size) => {
     const key = `${id_product}-${size}`;
     setItemTerpilih((prev) => {
@@ -94,10 +99,12 @@ export function KeranjangProvider({ children }) {
     });
   };
 
+  // Hitung total harga dari item yang dipilih untuk checkout
   const totalHargaTerpilih = itemKeranjang
     .filter((item) => itemTerpilih.includes(`${item.id_product}-${item.size}`))
     .reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  // Fungsi untuk mendapatkan detail item yang dipilih untuk checkout
   const getItemTerpilih = () => {
     return itemKeranjang.filter((item) =>
       itemTerpilih.includes(`${item.id_product}-${item.size}`)

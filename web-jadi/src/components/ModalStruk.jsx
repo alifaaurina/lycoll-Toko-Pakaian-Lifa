@@ -1,11 +1,13 @@
 import React from 'react';
 import './ModalStruk.css';
 
+// Komponen modal untuk menampilkan struk transaksi yang dapat dicetak, berisi informasi detail tentang transaksi, pelanggan, item yang dibeli, total pembayaran, dan metode pembayaran. Modal ini muncul setelah transaksi selesai dan memungkinkan pengguna untuk mencetak struk atau menutupnya.
 function ModalStruk({ transaksi, tutup }) {
   const handleCetak = () => {
     window.print();
   };
 
+  // Fungsi untuk memformat tanggal transaksi menjadi format yang lebih mudah dibaca
   const formatTanggal = (tanggal) => {
     return new Date(tanggal).toLocaleString('id-ID', {
       year: 'numeric',
@@ -91,7 +93,9 @@ function ModalStruk({ transaksi, tutup }) {
                   <span>Uang Dibayar</span>
                   <span>
                     Rp{' '}
-                    {Number(transaksi.cash_paid || 0).toLocaleString('id-ID')}
+                    {Math.round(transaksi.cash_paid || 0).toLocaleString(
+                      'id-ID'
+                    )}
                   </span>
                 </div>
 
@@ -99,7 +103,7 @@ function ModalStruk({ transaksi, tutup }) {
                   <span>Kembalian</span>
                   <span>
                     Rp{' '}
-                    {Number(transaksi.change_amount || 0).toLocaleString(
+                    {Math.round(transaksi.change_amount || 0).toLocaleString(
                       'id-ID'
                     )}
                   </span>

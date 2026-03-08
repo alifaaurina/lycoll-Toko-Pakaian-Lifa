@@ -9,7 +9,6 @@ import './ModalCheckout.css';
 function ModalCheckout({ tutup, sukses, isDirectBuy = false }) {
   const { itemKeranjang, itemTerpilih, transaksiLangsung, hapusItemTerpilih } =
     useKeranjang();
-
   const [dataForm, setDataForm] = useState({
     id_kasir: '',
     customer_name: '',
@@ -204,9 +203,41 @@ function ModalCheckout({ tutup, sukses, isDirectBuy = false }) {
             setReferenceNumber={setReferenceNumber}
           />
 
-          <button type="submit" disabled={loading || adaStokHabis}>
-            {loading ? 'Memproses...' : 'Bayar Sekarang'}
-          </button>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                backgroundColor: '#ff4da6',
+                color: 'white',
+                border: 'none',
+                padding: '12px',
+                borderRadius: '8px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                flex: 1,
+              }}
+            >
+              {loading ? 'Memproses...' : 'Bayar Sekarang'}
+            </button>
+
+            <button
+              type="button"
+              onClick={tutup}
+              style={{
+                backgroundColor: '#ccc',
+                color: '#333',
+                border: 'none',
+                padding: '12px',
+                borderRadius: '8px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                flex: 1,
+              }}
+            >
+              Batalkan Pesanan
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -6,6 +6,7 @@ import ProductsAdmin from './pages/ProductsAdmin';
 import TransactionsAdmin from './pages/TransactionsAdmin';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AdminRoute from './routes/AdminRoute';
+import UsersAdmin from './pages/UsersAdmin';
 
 function App() {
   return (
@@ -36,6 +37,15 @@ function App() {
         element={
           <AdminRoute>
             <TransactionsAdmin />
+          </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/dashboard/users"
+        element={
+          <AdminRoute>
+            <UsersAdmin />
           </AdminRoute>
         }
       />

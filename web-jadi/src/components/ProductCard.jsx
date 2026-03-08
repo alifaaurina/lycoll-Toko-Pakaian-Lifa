@@ -3,6 +3,7 @@ import './ProductCard.css';
 import { useKeranjang } from '../context/KeranjangContext';
 import ModalCheckout from './ModalCheckout';
 
+// Komponen kartu produk yang menampilkan informasi produk dan memungkinkan pengguna memilih size, jumlah, serta menambahkan ke keranjang atau langsung checkout
 function ProductCard({ id_product, name_product, price, stock, image }) {
   const { tambahKeKeranjang, setTransaksiLangsung } = useKeranjang();
   const [showModal, setShowModal] = useState(false);
@@ -12,15 +13,16 @@ function ProductCard({ id_product, name_product, price, stock, image }) {
 
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 
+  // Fungsi untuk mengatur jumlah produk yang akan dibeli
   const handleQty = (type) => {
     if (type === 'plus' && qty < stock) setQty(qty + 1);
     if (type === 'minus' && qty > 1) setQty(qty - 1);
   };
 
+  // Fungsi untuk menambahkan produk ke keranjang
   const handleAddToCart = (e) => {
     e.stopPropagation();
 
-    // Tambahkan ke keranjang (tidak langsung checkout)
     tambahKeKeranjang({
       id_product,
       name_product,
@@ -36,6 +38,7 @@ function ProductCard({ id_product, name_product, price, stock, image }) {
     setQty(1);
   };
 
+  // Fungsi untuk langsung checkout produk tanpa melalui keranjang
   const handleBuyNow = (e) => {
     e.stopPropagation();
 

@@ -493,3 +493,20 @@ form {
   color: #7b2cbf;
   font-weight: 600;
 }
+
+.tombol-modal .btn-bayar {
+  background: linear-gradient(135deg, #ff4da6, #c527a8) !important;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(197, 39, 168, 0.35);
+}
+
+.tombol-modal .btn-bayar:hover {
+  background: linear-gradient(135deg, #ff66b8, #d633b0) !important;
+  transform: translateY(-2px);
+}

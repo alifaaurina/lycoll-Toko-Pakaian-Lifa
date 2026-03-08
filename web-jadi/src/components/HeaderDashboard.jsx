@@ -51,9 +51,12 @@ function HeaderDashboard({ user, onLogout, onBukaKeranjang }) {
                     >
                       Riwayat Transaksi
                     </button>
+
+                    <button onClick={() => handleNavigate('/dashboard/users')}>
+                      Kelola Users
+                    </button>
                   </>
                 )}
-
                 <button onClick={onLogout}>Logout</button>
               </div>
             )}

@@ -6,6 +6,7 @@ import SidebarKeranjang from '../components/SidebarKeranjang';
 import Footer from '../components/Footer';
 import './Dashboard.css';
 
+// Halaman utama dashboard menampilkan produk dan fitur pencarian serta kategori
 function Dashboard() {
   const [produk, setProduk] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,17 +14,17 @@ function Dashboard() {
   const [user, setUser] = useState(null);
   const [refreshKey, setRefreshKey] = useState(0);
 
-  // --- FITUR M3: State Pencarian & Kategori ---
+  // FITUR M3: State Pencarian & Kategori
   const [kataKunci, setKataKunci] = useState('');
   const [kategoriTerpilih, setKategoriTerpilih] = useState('Semua');
   const [daftarKategori, setDaftarKategori] = useState([]);
 
   const navigate = useNavigate();
 
-  // --- FITUR BARU: Ambil Daftar Kategori Langsung dari Database ---
+  // FITUR BARU: Ambil Daftar Kategori Langsung dari Database
   const fetchKategori = useCallback(async () => {
     try {
-      // Pastikan endpoint ini sesuai dengan backend kamu (biasanya /categories)
+      // Ambil semua kategori dari backend
       const response = await fetch('http://localhost:5000/categories');
       if (response.ok) {
         const data = await response.json();
@@ -35,6 +36,7 @@ function Dashboard() {
     }
   }, []);
 
+  // Ambil data produk dari backend
   const fetchProduk = useCallback(async () => {
     try {
       setLoading(true);
@@ -54,7 +56,7 @@ function Dashboard() {
       navigate('/');
       return;
     }
-
+    // Ambil data user untuk menampilkan nama di header
     const ambilUser = async () => {
       try {
         const response = await fetch('http://localhost:5000/auth/me', {
@@ -87,13 +89,14 @@ function Dashboard() {
     };
   }, []);
 
+  // Fungsi untuk logout
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('keranjang');
     navigate('/');
   };
 
-  // --- LOGIKA FILTERING ---
+  // Fungsi untuk cetak struk
   const produkDifilter = produk.filter((p) => {
     const namaCocok = p.name_product
       .toLowerCase()
@@ -107,6 +110,7 @@ function Dashboard() {
     return <div className="loading">Memuat...</div>;
   }
 
+  // Render halaman dashboard dengan header, daftar produk, dan footer
   return (
     <div className="dashboard-container">
       <HeaderDashboard
@@ -114,7 +118,6 @@ function Dashboard() {
         onLogout={handleLogout}
         onBukaKeranjang={() => setKeranjangBuka(true)}
       />
-
       <main className="dashboard-content">
         {/* SEARCH & CATEGORY BUTTONS (PINK THEME) */}
         <div className="search-category-section">
@@ -169,7 +172,6 @@ function Dashboard() {
           )}
         </div>
       </main>
-
       <Footer />
       <SidebarKeranjang
         buka={keranjangBuka}
