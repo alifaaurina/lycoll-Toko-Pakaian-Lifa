@@ -1,34 +1,35 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
 
 const app = express();
 
-// Routes
-app.use(express.json());
+// CORS
 app.use(
   cors({
-    origin: '*', // biar bisa diakses dari frontend di mana saja
+    origin: 'http://localhost:5173',
     credentials: true,
   })
 );
 
-// Import routes
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const productRoutes = require('./routes/products');
-const transactionRoutes = require('./routes/transactions');
-const categoryRoutes = require('./routes/categories');
+app.use(express.json());
 
-// Routes
+// IMPORT ROUTES
+const authRoutes = require('./src/routes/auth');
+const userRoutes = require('./src/routes/users');
+const productRoutes = require('./src/routes/products');
+const transactionRoutes = require('./src/routes/transactions');
+const categoryRoutes = require('./src/routes/categories');
+
+// ROUTES
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
 app.use('/transactions', transactionRoutes);
 app.use('/categories', categoryRoutes);
 
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`✅ Server jalan di port ${PORT}`));
+// SERVER
+const PORT = 5000;
 
-module.exports = app;
+app.listen(PORT, () => {
+  console.log(`✅ Server backend jalan di http://localhost:${PORT}`);
+});
