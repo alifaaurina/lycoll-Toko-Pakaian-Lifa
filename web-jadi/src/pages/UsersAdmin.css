@@ -55,7 +55,7 @@
   width: 100%;
   border-collapse: collapse;
 
-  background: white;
+  background: rgb(243, 227, 239);
   border-radius: 12px;
   overflow: hidden;
 
@@ -64,7 +64,7 @@
 
 /* HEADER TABLE */
 .users-table thead {
-  background: linear-gradient(90deg, #ff4da6, #7a5cff);
+  background: linear-gradient(90deg, #ff4da6, #9a88e8);
   color: white;
 }
 .users-table th {
@@ -78,7 +78,7 @@
   border-bottom: 1px solid #eee;
 }
 .users-table tr:hover {
-  background: #fff3f8;
+  background: #e090d3d6;
 }
 
 /* ROLE BADGE*/

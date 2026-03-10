@@ -4,7 +4,14 @@ import { useKeranjang } from '../context/KeranjangContext';
 import ModalCheckout from './ModalCheckout';
 
 // Komponen kartu produk yang menampilkan informasi produk dan memungkinkan pengguna memilih size, jumlah, serta menambahkan ke keranjang atau langsung checkout
-function ProductCard({ id_product, name_product, price, stock, image }) {
+function ProductCard({
+  id_product,
+  name_product,
+  price,
+  stock,
+  image,
+  description,
+}) {
   const { tambahKeKeranjang, setTransaksiLangsung } = useKeranjang();
   const [showModal, setShowModal] = useState(false);
   const [showDirectCheckout, setShowDirectCheckout] = useState(false);
@@ -66,25 +73,45 @@ function ProductCard({ id_product, name_product, price, stock, image }) {
 
   return (
     <>
-      <div className="product-card" onClick={() => setShowModal(true)}>
+      <div
+        className="product-card"
+        onClick={() => stock > 0 && setShowModal(true)}
+      >
         <div className="product-image-container">
+          {/* Label jika stok habis */}
+          {stock === 0 && <div className="stock-badge">STOK HABIS</div>}
+          {stock > 0 && stock <= 5 && (
+            <div className="stock-warning">STOK MENIPIS</div>
+          )}
+
           {image && image.startsWith('http') ? (
-            <img src={image} alt={name_product} className="product-img-file" />
+            <img
+              src={image}
+              alt={name_product}
+              className="product-img-file"
+              style={{ opacity: stock === 0 ? 0.5 : 1 }}
+            />
           ) : (
             <div className="product-emoji-fallback">👕</div>
           )}
         </div>
+
         <div className="product-info">
           <h3 className="product-title">
             {name_product || 'Produk Tanpa Nama'}
           </h3>
-          <p className="product-stock">Stok: {stock}</p>
+
+          <p className="product-description">
+            {description || 'Tidak ada deskripsi'}
+          </p>
+
+          <p className="product-stock">Stok: {stock === 0 ? 'Habis' : stock}</p>
+
           <p className="product-price">
             Rp {price ? Number(price).toLocaleString('id-ID') : '0'}
           </p>
         </div>
       </div>
-
       {/* MODAL PILIH SIZE & QTY */}
       {showModal && (
         <div className="size-modal-overlay" onClick={() => setShowModal(false)}>

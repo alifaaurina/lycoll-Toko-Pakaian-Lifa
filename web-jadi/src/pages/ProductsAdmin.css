@@ -13,7 +13,7 @@
 }
 /* ===== CARD FORM ===== */
 .products-form {
-  background: white;
+  background: rgb(255, 255, 255);
   padding: 25px;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(123, 44, 191, 0.1);
@@ -168,4 +168,168 @@
 .search-container input:focus {
   border-color: #c77dff;
   box-shadow: 0 0 8px rgba(199, 125, 255, 0.4);
+}
+
+
+.products-form textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+  resize: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+.products-form textarea:focus {
+  border-color: #c77dff;
+  box-shadow: 0 0 6px rgba(199, 125, 255, 0.4);
+}
+
+.product-img-preview {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.desc-cell {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.products-table th,
+.products-table td {
+  padding: 14px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ===== GAMBAR ===== */
+
+.col-img {
+  width: 90px;
+}
+
+.product-img-preview {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ===== NAMA ===== */
+
+.col-name {
+  width: 180px;
+  font-weight: 500;
+}
+
+/* ===== KATEGORI ===== */
+
+.col-category {
+  width: 150px;
+}
+
+/* ===== HARGA ===== */
+
+.col-price {
+  width: 140px;
+  font-weight: 500;
+}
+
+/* ===== STOK ===== */
+
+.col-stock {
+  width: 80px;
+}
+
+/* ===== SIZE ===== */
+
+.col-size {
+  width: 70px;
+}
+
+/* ===== DESKRIPSI ===== */
+
+.desc-cell {
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}
+
+/* ===== AKSI ===== */
+
+.col-action {
+  width: 140px;
+}
+.product-img-preview:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(123, 44, 191, 0.1);
+  table-layout: fixed;
+}
+/* Atur lebar kolom Gambar */
+.products-table th:nth-child(1),
+.products-table td:nth-child(1) {
+  width: 90px;
+}
+
+/* Atur lebar kolom Nama Produk */
+.products-table th:nth-child(2),
+.products-table td:nth-child(2) {
+  width: 170px;
+}
+
+/* Atur lebar kolom Kategori */
+.products-table th:nth-child(3),
+.products-table td:nth-child(3) {
+  width: 120px;
+}
+
+/* Atur lebar kolom Harga */
+.products-table th:nth-child(4),
+.products-table td:nth-child(4) {
+  width: 130px;
+}
+
+/* Atur lebar kolom Stok */
+.products-table th:nth-child(5),
+.products-table td:nth-child(5) {
+  width: 80px;
+}
+
+/* Atur lebar kolom Size */
+.products-table th:nth-child(6),
+.products-table td:nth-child(6) {
+  width: 80px;
+}
+
+/* Atur lebar kolom Deskripsi */
+.products-table th:nth-child(7),
+.products-table td:nth-child(7) {
+  width: 220px;
+}
+
+/* Atur lebar kolom Aksi */
+.products-table th:nth-child(8),
+.products-table td:nth-child(8) {
+  width: 140px;
+}
+
+.desc-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

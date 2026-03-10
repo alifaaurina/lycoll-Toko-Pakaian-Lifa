@@ -162,6 +162,7 @@ function Dashboard() {
                 stock={p.stock}
                 size={p.size}
                 image={p.image}
+                description={p.description}
               />
             ))
           ) : (

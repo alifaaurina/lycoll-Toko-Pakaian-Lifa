@@ -16,6 +16,7 @@ function ProductsAdmin() {
     stock: '',
     size: '',
     image: '',
+    description: '',
   });
 
   const token = localStorage.getItem('token');
@@ -55,6 +56,7 @@ function ProductsAdmin() {
       stock: '',
       size: '',
       image: '',
+      description: '',
     });
     setEditId(null);
   };
@@ -96,6 +98,7 @@ function ProductsAdmin() {
       stock: product.stock || '',
       size: product.size || '',
       image: product.image || '',
+      description: product.description || '',
     });
     setEditId(product.id_product);
   };
@@ -229,6 +232,14 @@ function ProductsAdmin() {
           onChange={handleChange}
         />
 
+        <textarea
+          name="description"
+          placeholder="Deskripsi Produk"
+          value={form.description}
+          onChange={handleChange}
+          rows="3"
+        />
+
         <button type="submit" className="btn-primary">
           {editId ? 'Update Produk' : 'Tambah Produk'}
         </button>
@@ -243,26 +254,40 @@ function ProductsAdmin() {
       <table className="products-table">
         <thead>
           <tr>
-            <th>Nama</th>
+            <th>Gambar</th>
+            <th>Nama Produk</th>
             <th>Kategori</th>
-            <th>Harga</th>
+            <th>Harga Produk</th>
             <th>Stok</th>
             <th>Size</th>
+            <th>Deskripsi</th>
             <th>Aksi</th>
           </tr>
         </thead>
+        
         <tbody>
           {filteredProducts.map((p) => (
             <tr key={p.id_product}>
-              <td>{p.name_product}</td>
-              <td>{p.name_category}</td>
-              <td>Rp {p.price}</td>
-              <td>{p.stock}</td>
-              <td>{p.size}</td>
-              <td>
+              <td className="col-img">
+                <img
+                  src={p.image}
+                  alt={p.name_product}
+                  className="product-img-preview"
+                />
+
+              </td>
+              <td className="col-name">{p.name_product}</td>
+              <td className="col-category">{p.name_category}</td>
+              <td className="col-price">Rp {p.price}</td>
+              <td className="col-stock">{p.stock}</td>
+              <td className="col-size">{p.size}</td>
+              <td className="desc-cell">{p.description}</td>
+              <td className="col-action">
+
                 <button className="btn-edit" onClick={() => handleEdit(p)}>
                   Edit
                 </button>
+                
                 <button
                   className="btn-danger"
                   onClick={() => handleDelete(p.id_product)}

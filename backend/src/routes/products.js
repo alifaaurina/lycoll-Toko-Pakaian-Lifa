@@ -39,7 +39,15 @@ router.get('/:id', async (req, res) => {
 // Create product (Admin only)
 router.post('/', authenticateToken, requireAdmin, async (req, res) => {
   try {
-    const { id_category, name_product, price, stock, size, image } = req.body;
+    const {
+      id_category,
+      name_product,
+      price,
+      stock,
+      size,
+      image,
+      description,
+    } = req.body;
 
     if (!name_product || !price || stock === undefined) {
       return res
@@ -48,10 +56,11 @@ router.post('/', authenticateToken, requireAdmin, async (req, res) => {
     }
 
     const result = await pool.query(
-      `INSERT INTO products (id_category, name_product, price, stock, size, image, created_at, updated_at)
-       VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-       RETURNING *`,
-      [id_category, name_product, price, stock, size, image]
+      `INSERT INTO products 
+   (id_category, name_product, price, stock, size, image, description, created_at, updated_at)
+   VALUES ($1, $2, $3, $4, $5, $6, $7, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+   RETURNING *`,
+      [id_category, name_product, price, stock, size, image, description]
     );
 
     res.status(201).json({
@@ -68,15 +77,29 @@ router.post('/', authenticateToken, requireAdmin, async (req, res) => {
 router.put('/:id', authenticateToken, requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
-    const { id_category, name_product, price, stock, size, image } = req.body;
+    const {
+      id_category,
+      name_product,
+      price,
+      stock,
+      size,
+      image,
+      description,
+    } = req.body;
 
     const result = await pool.query(
       `UPDATE products 
-       SET id_category = $1, name_product = $2, price = $3, stock = $4, 
-           size = $5, image = $6, updated_at = CURRENT_TIMESTAMP
-       WHERE id_product = $7
-       RETURNING *`,
-      [id_category, name_product, price, stock, size, image, id]
+   SET id_category = $1,
+       name_product = $2,
+       price = $3,
+       stock = $4,
+       size = $5,
+       image = $6,
+       description = $7,
+       updated_at = CURRENT_TIMESTAMP
+   WHERE id_product = $8
+   RETURNING *`,
+      [id_category, name_product, price, stock, size, image, description, id]
     );
 
     if (result.rows.length === 0) {
