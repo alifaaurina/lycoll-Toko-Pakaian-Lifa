@@ -39,6 +39,18 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
+// CORS
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'https://lycoll-backend.onrender.com',
+      'https://lycoll-toko-pakaian-lifa.onrender.com', // ganti dengan URL frontend kamu
+    ],
+    credentials: true,
+  })
+);
+
 // SERVER
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
