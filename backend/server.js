@@ -1,12 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const pool = require('./src/db/pool');
 
 const app = express();
 
 // CORS
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://lycoll-backend.onrender.com'],
     credentials: true,
   })
 );
@@ -27,9 +29,18 @@ app.use('/products', productRoutes);
 app.use('/transactions', transactionRoutes);
 app.use('/categories', categoryRoutes);
 
-// SERVER
-const PORT = 5000;
+// TEST DB
+app.get('/test-db', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM categories');
+    res.json({ status: '✅ Koneksi berhasil!', data: result.rows });
+  } catch (err) {
+    res.json({ status: '❌ Koneksi gagal', error: err.message });
+  }
+});
 
+// SERVER
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅ Server backend jalan di http://localhost:${PORT}`);
 });
