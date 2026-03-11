@@ -5,14 +5,6 @@ const pool = require('./src/db/pool');
 
 const app = express();
 
-// CORS
-app.use(
-  cors({
-    origin: ['http://localhost:5173', 'https://lycoll-backend.onrender.com'],
-    credentials: true,
-  })
-);
-
 app.use(express.json());
 
 // IMPORT ROUTES
@@ -45,7 +37,7 @@ app.use(
     origin: [
       'http://localhost:5173',
       'https://lycoll-backend.onrender.com',
-      'https://lycoll-toko-pakaian-lifa.onrender.com', // ganti dengan URL frontend kamu
+      'https://lycoll-frontend.onrender.com', // ganti dengan URL frontend kamu
     ],
     credentials: true,
   })
