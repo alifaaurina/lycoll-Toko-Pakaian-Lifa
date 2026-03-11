@@ -62,32 +62,55 @@ function ProductsAdmin() {
   };
 
   // Handle submit untuk tambah atau update produk
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+   e.preventDefault();
 
-    const method = editId ? 'PUT' : 'POST';
-    const url = editId
-      ? `https://lycoll-backend.onrender.com/products/${editId}`
-      : 'https://lycoll-backend.onrender.com/products';
+   // - Cek duplikat nama produk
+   const isDuplicate = products.some(
+     (p) =>
+       p.name_product.toLowerCase() === form.name_product.toLowerCase() &&
+       p.id_product !== editId
+   );
 
-    const res = await fetch(url, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(form),
-    });
+   if (isDuplicate) {
+     alert('Nama produk sudah ada! Gunakan nama yang berbeda.');
+     return;
+   }
 
-    const data = await res.json();
+   // - Cek harga dan stok tidak boleh negatif
+   if (Number(form.price) <= 0) {
+     alert('Harga tidak boleh 0 atau negatif!');
+     return;
+   }
 
-    if (res.ok) {
-      fetchProducts();
-      resetForm();
-    } else {
-      alert(data.message || 'Gagal menyimpan produk');
-    }
-  };
+   if (Number(form.stock) < 0) {
+     alert('Stok tidak boleh negatif!');
+     return;
+   }
+
+   const method = editId ? 'PUT' : 'POST';
+   const url = editId
+     ? `https://lycoll-backend.onrender.com/products/${editId}`
+     : 'https://lycoll-backend.onrender.com/products';
+
+   const res = await fetch(url, {
+     method,
+     headers: {
+       'Content-Type': 'application/json',
+       Authorization: `Bearer ${token}`,
+     },
+     body: JSON.stringify(form),
+   });
+
+   const data = await res.json();
+
+   if (res.ok) {
+     fetchProducts();
+     resetForm();
+   } else {
+     alert(data.message || 'Gagal menyimpan produk');
+   }
+ };
 
   // Handle edit produk
   const handleEdit = (product) => {
