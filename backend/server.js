@@ -5,11 +5,15 @@ const pool = require('./src/db/pool');
 
 const app = express();
 
-app.use(express.json());
+// CORS - taruh paling atas
+app.use(cors({ origin: '*' }));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, PATCH, DELETE, OPTIONS'
+  );
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
@@ -19,6 +23,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use(express.json());
 
 // IMPORT ROUTES
 const authRoutes = require('./src/routes/auth');
@@ -43,18 +49,6 @@ app.get('/test-db', async (req, res) => {
     res.json({ status: '❌ Koneksi gagal', error: err.message });
   }
 });
-
-// CORS
-app.use(
-  cors({
-    origin: [
-      'http://localhost:5173',
-      'https://lycoll-backend.onrender.com',
-      'https://lycoll-frontend.onrender.com', // ganti dengan URL frontend kamu
-    ],
-    credentials: true,
-  })
-);
 
 // SERVER
 const PORT = process.env.PORT || 5000;
