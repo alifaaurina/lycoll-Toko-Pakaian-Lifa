@@ -13,6 +13,7 @@ function UsersAdmin() {
     role: 'Kasir',
   });
 
+
   const token = localStorage.getItem('token');
 
   // AMBIL DATA USERS
@@ -80,7 +81,6 @@ function UsersAdmin() {
   // DISABLE USER
   const disableUser = async (id) => {
     if (!window.confirm('Nonaktifkan user ini?')) return;
-    // Server error, tampilkan error message
 
     try {
       const res = await fetch(
@@ -93,8 +93,12 @@ function UsersAdmin() {
         }
       );
 
+      const data = await res.json();
+
       if (res.ok) {
         fetchUsers();
+      } else {
+        alert(data.message); // tampilkan pesan error dari backend
       }
     } catch (err) {
       alert('Server error');
