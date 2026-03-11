@@ -25,7 +25,9 @@ function Dashboard() {
   const fetchKategori = useCallback(async () => {
     try {
       // Ambil semua kategori dari backend
-      const response = await fetch('http://localhost:5000/categories');
+      const response = await fetch(
+        'https://lycoll-backend.onrender.com/categories'
+      );
       if (response.ok) {
         const data = await response.json();
         // Ambil hanya nama kategorinya saja
@@ -40,7 +42,9 @@ function Dashboard() {
   const fetchProduk = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5000/products');
+      const response = await fetch(
+        'https://lycoll-backend.onrender.com/products'
+      );
       const data = await response.json();
       setProduk(data);
     } catch (error) {
@@ -59,9 +63,12 @@ function Dashboard() {
     // Ambil data user untuk menampilkan nama di header
     const ambilUser = async () => {
       try {
-        const response = await fetch('http://localhost:5000/auth/me', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await fetch(
+          'https://lycoll-backend.onrender.com/auth/me',
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         if (response.ok) {
           const data = await response.json();
           setUser(data);

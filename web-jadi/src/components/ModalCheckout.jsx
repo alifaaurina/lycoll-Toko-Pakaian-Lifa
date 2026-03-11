@@ -52,9 +52,12 @@ function ModalCheckout({ tutup, sukses, isDirectBuy = false }) {
 
     const ambilData = async () => {
       try {
-        const userRes = await fetch('http://localhost:5000/auth/me', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const userRes = await fetch(
+          'https://lycoll-backend.onrender.com/auth/me',
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
         if (userRes.ok) {
           const userData = await userRes.json();
@@ -66,9 +69,12 @@ function ModalCheckout({ tutup, sukses, isDirectBuy = false }) {
               id_kasir: userData.id_user,
             }));
           } else if (userData.role === 'Admin') {
-            const kasirRes = await fetch('http://localhost:5000/users/kasir', {
-              headers: { Authorization: `Bearer ${token}` },
-            });
+            const kasirRes = await fetch(
+              'https://lycoll-backend.onrender.com/users/kasir',
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
 
             if (kasirRes.ok) {
               const kasirData = await kasirRes.json();
@@ -140,14 +146,17 @@ function ModalCheckout({ tutup, sukses, isDirectBuy = false }) {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/transactions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch(
+        'https://lycoll-backend.onrender.com/transactions',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(payload),
+        }
+      );
 
       const data = await response.json();
 

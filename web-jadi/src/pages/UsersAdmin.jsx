@@ -18,7 +18,7 @@ function UsersAdmin() {
   // AMBIL DATA USERS
   const fetchUsers = async () => {
     try {
-      const res = await fetch('http://localhost:5000/users', {
+      const res = await fetch('https://lycoll-backend.onrender.com/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -47,7 +47,7 @@ function UsersAdmin() {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:5000/users', {
+      const res = await fetch('https://lycoll-backend.onrender.com/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -83,12 +83,15 @@ function UsersAdmin() {
     // Server error, tampilkan error message
 
     try {
-      const res = await fetch(`http://localhost:5000/users/${id}/disable`, {
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `https://lycoll-backend.onrender.com/users/${id}/disable`,
+        {
+          method: 'PATCH',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (res.ok) {
         fetchUsers();
@@ -101,12 +104,15 @@ function UsersAdmin() {
   // ENABLE USER
   const enableUser = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/users/${id}/enable`, {
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        `https://lycoll-backend.onrender.com/users/${id}/enable`,
+        {
+          method: 'PATCH',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (res.ok) {
         fetchUsers();

@@ -12,11 +12,14 @@ function TransactionsAdmin() {
   const token = localStorage.getItem('token');
   // Fetch semua transaksi
   const fetchTransactions = async () => {
-    const res = await fetch('http://localhost:5000/transactions', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await fetch(
+      'https://lycoll-backend.onrender.com/transactions',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     const data = await res.json();
     setTransactions(data);
   };
@@ -28,11 +31,14 @@ function TransactionsAdmin() {
       return;
     }
 
-    const res = await fetch(`http://localhost:5000/transactions/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await fetch(
+      `https://lycoll-backend.onrender.com/transactions/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const data = await res.json();
     setDetail(data);

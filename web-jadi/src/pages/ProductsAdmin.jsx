@@ -23,14 +23,14 @@ function ProductsAdmin() {
 
   // 🔹 Fetch Products
   const fetchProducts = async () => {
-    const res = await fetch('http://localhost:5000/products');
+    const res = await fetch('https://lycoll-backend.onrender.com/products');
     const data = await res.json();
     setProducts(data);
   };
 
   // 🔹 Fetch Categories
   const fetchCategories = async () => {
-    const res = await fetch('http://localhost:5000/categories');
+    const res = await fetch('https://lycoll-backend.onrender.com/categories');
     const data = await res.json();
     setCategories(data);
   };
@@ -67,8 +67,8 @@ function ProductsAdmin() {
 
     const method = editId ? 'PUT' : 'POST';
     const url = editId
-      ? `http://localhost:5000/products/${editId}`
-      : 'http://localhost:5000/products';
+      ? `https://lycoll-backend.onrender.com/products/${editId}`
+      : 'https://lycoll-backend.onrender.com/products';
 
     const res = await fetch(url, {
       method,
@@ -107,12 +107,15 @@ function ProductsAdmin() {
   const handleDelete = async (id) => {
     if (!window.confirm('Yakin ingin menghapus produk?')) return;
 
-    const res = await fetch(`http://localhost:5000/products/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await fetch(
+      `https://lycoll-backend.onrender.com/products/${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const data = await res.json();
 
@@ -264,7 +267,7 @@ function ProductsAdmin() {
             <th>Aksi</th>
           </tr>
         </thead>
-        
+
         <tbody>
           {filteredProducts.map((p) => (
             <tr key={p.id_product}>
@@ -274,7 +277,6 @@ function ProductsAdmin() {
                   alt={p.name_product}
                   className="product-img-preview"
                 />
-
               </td>
               <td className="col-name">{p.name_product}</td>
               <td className="col-category">{p.name_category}</td>
@@ -283,11 +285,10 @@ function ProductsAdmin() {
               <td className="col-size">{p.size}</td>
               <td className="desc-cell">{p.description}</td>
               <td className="col-action">
-
                 <button className="btn-edit" onClick={() => handleEdit(p)}>
                   Edit
                 </button>
-                
+
                 <button
                   className="btn-danger"
                   onClick={() => handleDelete(p.id_product)}
